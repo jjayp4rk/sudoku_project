@@ -1,0 +1,5 @@
+node_modules
+*.sw[opn]
+.DS_STORE
+.tmp
+npm-debug.log
