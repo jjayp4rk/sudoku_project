@@ -1,67 +1,59 @@
-const express = require('express')
-const webpack = require('webpack')
-const webpackDevMiddleware = require('webpack-dev-middleware')
-const path = require('path')
-import problems from './problems'
+const express = require('express');
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const path = require('path');
+import problems from './problems';
 
-const app = express()
+const app = express();
 
-app.get('/', function (request,response) {
-  response.
-    sendFile(
-      path.join(__dirname + '/src/index.html')
-    )
-})
+app.get('/', function(request, response) {
+  response.sendFile(path.join(__dirname + '/src/index.html'));
+});
 
-let lastSolutionIndex = null
-let lastProblemIndex = null
+let lastSolutionIndex = null;
+let lastProblemIndex = null;
 function randomProblemAndSolution() {
-
-  const randomProblemIndex = Math.floor(Math.random() * problems.length)
+  const randomProblemIndex = Math.floor(Math.random() * problems.length);
 
   if (randomProblemIndex === lastProblemIndex) {
-    return randomProblemAndSolution()
+    return randomProblemAndSolution();
   }
 
-  const problem = problems[randomProblemIndex]
+  const problem = problems[randomProblemIndex];
 
-  const randomSolutionIndex = Math.floor(Math.random() * problem.solutions.length)
+  const randomSolutionIndex = Math.floor(
+    Math.random() * problem.solutions.length
+  );
 
   if (randomSolutionIndex === lastSolutionIndex) {
-    return randomProblemAndSolution()
+    return randomProblemAndSolution();
   }
 
-  const solution = problem.solutions[randomSolutionIndex]
+  const solution = problem.solutions[randomSolutionIndex];
 
-  lastSolutionIndex = randomSolutionIndex
-  lastProblemIndex = randomProblemIndex
+  lastSolutionIndex = randomSolutionIndex;
+  lastProblemIndex = randomProblemIndex;
 
   return {
     problem: problem.problemData,
-    solution,
-  }
+    solution
+  };
 }
 
 app.get('/sudoku', (request, response) => {
-  response.json(randomProblemAndSolution())
-})
+  response.json(randomProblemAndSolution());
+});
 
-const config = require('./webpack.config')
-const compiler = webpack(config)
+const config = require('./webpack.config');
+const compiler = webpack(config);
 
 app.use(
-  webpackDevMiddleware(
-    compiler,
-    {
-      publicPath: config.output.publicPath,
-      stats: {
-        colors: true
-      },
+  webpackDevMiddleware(compiler, {
+    publicPath: config.output.publicPath,
+    stats: {
+      colors: true
     }
-  )
-)
+  })
+);
 
-app.listen(
-  3000,
-  () => console.log('listening on 3000')
-)
+app.listen(3000, () => console.log('listening on 3000'));
