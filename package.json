@@ -29,7 +29,6 @@
     "jasmine": "2.5.2"
   },
   "scripts": {
-    "test": "babel-node `which jasmine`",
     "start": "nodemon server.js --exec babel-node --presets es2015,stage-0",
     "archive": "git archive --format zip --output archive.zip master",
     "heroku-postbuild": "webpack -p"
