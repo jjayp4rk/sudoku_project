@@ -1,13 +1,13 @@
-const express = require('express');
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const path = require('path');
-import problems from './problems';
+const express = require("express");
+const webpack = require("webpack");
+const webpackDevMiddleware = require("webpack-dev-middleware");
+const path = require("path");
+import problems from "./problems";
 
 const app = express();
 
-app.get('/', function(request, response) {
-  response.sendFile(path.join(__dirname + '/src/index.html'));
+app.get("/", function(request, response) {
+  response.sendFile(path.join(__dirname + "/src/index.html"));
 });
 
 let lastSolutionIndex = null;
@@ -40,11 +40,11 @@ function randomProblemAndSolution() {
   };
 }
 
-app.get('/sudoku', (request, response) => {
+app.get("/sudoku", (request, response) => {
   response.json(randomProblemAndSolution());
 });
 
-const config = require('./webpack.config');
+const config = require("./webpack.config");
 const compiler = webpack(config);
 
 app.use(
@@ -56,4 +56,4 @@ app.use(
   })
 );
 
-app.listen(3000, () => console.log('listening on 3000'));
+app.listen(process.env.PORT || 3000, () => console.log("listening on 3000"));
