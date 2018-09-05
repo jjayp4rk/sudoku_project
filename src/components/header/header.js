@@ -6,24 +6,20 @@ class header extends Component {
     return (
       <div className="header">
         <div className="container-info">
-          <div className="Endgame">ENDGAME.</div>
-          <div className="Lets-Play">Let's play.</div>
-          <div className="Sudoku">SUDOKU</div>
+          <div className="Endgame">Let's play</div>
+          <div className="Lets-Play">SUDOKU</div>
           <div className="sudoku-description">
             <p>
-              Hello Applicant! Please implement this sudoku visualizer design.
-              Clicking ‘LOAD NEW’ should fetch another sudoku problem from the
-              server and visualize it.
+              Enter a value from 1-9 in any empty cell. Input values will appear
+              blue on valid and red on invalid. To start a new problem, press
+              the the LOAD NEW.
             </p>
             <p>
-              When visualizing the sudoku problem and solution, represent
-              user-entered cells with blue text. Represent problem-provided
-              cells with bold gray text. Represent user-entered invalid cells
-              with red text.
-            </p>
-            <p>
-              Please also include this message in your sudoku visualizer. Please
-              also include this message in your sudoku visualizer.
+              Learn Sudoku{" "}
+              <a href="https://www.conceptispuzzles.com/index.aspx?uri=puzzle/sudoku/rules">
+                {" "}
+                here!
+              </a>
             </p>
           </div>
         </div>
